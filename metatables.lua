@@ -30,7 +30,7 @@ function strict_read(table, key)
     end
 end
 function strict_write(table, key, value)
-    if __private[key] then
+    if __private[key] and value then
         error('Key already exists: ' .. key)
     else
         __private[key] = value
@@ -47,6 +47,8 @@ setmetatable(treasure, mt)
 --this will fail
 --print(treasure.gold)
 treasure.gold = 50
--- this will also fail
+-- deleting is allowed
+treasure.gold = nil
+-- this will fail
 --treasure.gold = 100
 print(treasure.gold)
